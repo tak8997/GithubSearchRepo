@@ -10,8 +10,8 @@ internal class UserRepoRepository(
     suspend fun fetchUserRepos(userName: String) = coroutineScope {
         val user = async { userRepoApi.fetchUser(userName) }
         val userRepo = async { userRepoApi.fetchRepos(userName) }
-        val userResult = user.await()
-        val userRepoResult = userRepo.await()
+        val userResult = safeApiCall { user.await() }
+        val userRepoResult = safeApiCall { userRepo.await() }
         
         return@coroutineScope Pair(userResult, userRepoResult)
     }

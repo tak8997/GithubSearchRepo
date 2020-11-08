@@ -55,9 +55,9 @@ class UserRepoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    fun setItems(repoResults: Pair<User, List<Repo>>?) {
-        val user = repoResults?.first ?: return
-        val repos = repoResults.second
+    fun setItems(repoResults: Pair<User?, List<Repo>?>) {
+        val user = repoResults.first ?: return
+        val repos = repoResults.second ?: return
 
         this.user = user
         this.repos.clear()
