@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.tak8997.github.githubsearchrepo.databinding.ActivityUserRepoBinding
 
 internal class UserRepoActivity : AppCompatActivity() {
@@ -29,12 +29,12 @@ internal class UserRepoActivity : AppCompatActivity() {
 
     private fun subscribe() {
         with(viewModel) {
-            errorToast.observe(this@UserRepoActivity, EventObserver {
-                Toast.makeText(this@UserRepoActivity, "", Toast.LENGTH_SHORT).show()
-            })
-            viewState.observe(this@UserRepoActivity, Observer {
+            errorToast.observe(this@UserRepoActivity)  {
+                Toast.makeText(this@UserRepoActivity, it, Toast.LENGTH_SHORT).show()
+            }
+            viewState.observe(this@UserRepoActivity) {
                 userRepoAdapter.setItems(it)
-            })
+            }
         }
     }
 

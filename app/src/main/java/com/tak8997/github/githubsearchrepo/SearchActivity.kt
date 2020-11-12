@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.tak8997.github.githubsearchrepo.databinding.ActivitySearchBinding
 
 class SearchActivity : AppCompatActivity() {
@@ -21,8 +22,8 @@ class SearchActivity : AppCompatActivity() {
                     viewModel = this@SearchActivity.viewModel
                 }
 
-        viewModel.navigateToUserRepo.observe(this, EventObserver {
+        viewModel.navigateToUserRepo.observe(this) {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("testapp://repos/$it")))
-        })
+        }
     }
 }

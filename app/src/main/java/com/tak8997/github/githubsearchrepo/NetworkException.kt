@@ -1,3 +1,3 @@
 package com.tak8997.github.githubsearchrepo
 
-class NetworkException(message: String) : Exception(message)
+data class NetworkException(val msg: String) : Exception(msg)

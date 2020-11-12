@@ -3,6 +3,10 @@ package com.tak8997.github.githubsearchrepo
 
 sealed class Result<out R> {
 
+    companion object {
+        fun <T> success(data: T): Result<T> = Success(data)
+    }
+
     data class Success<out T>(val data: T) : Result<T>()
     data class Error(val exception: Exception) : Result<Nothing>()
     object Loading : Result<Nothing>()

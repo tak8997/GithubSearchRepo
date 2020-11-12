@@ -8,10 +8,10 @@ internal class UserRepoViewModel(
 ) : ViewModel() {
 
     private val userRepoResult = MutableLiveData<Pair<Result<User>, Result<List<Repo>>>>()
-    val errorToast = MediatorLiveData<Event<Unit>>().apply {
-        addSource(userRepoResult) { (userResult, _) ->
-            if (userResult is Result.Error) {
-                value = Event(Unit)
+    val errorToast = MediatorLiveData<Int>().apply {
+        addSource(userRepoResult) { (userResult, reposResult) ->
+            if (userResult is Result.Error || reposResult is Result.Error) {
+                value = R.string.something_went_wrong
             }
         }
     }
@@ -22,7 +22,7 @@ internal class UserRepoViewModel(
 
     fun onCreate(userName: String?) {
         if (userName.isNullOrEmpty()) {
-            errorToast.value = Event(Unit)
+            errorToast.value = R.string.something_went_wrong
             return
         }
 

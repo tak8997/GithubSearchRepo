@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 
 internal class SearchViewModel : ViewModel() {
 
-    val navigateToUserRepo = MutableLiveData<Event<String>>()
+    val navigateToUserRepo = MutableLiveData<String>()
 
     fun onClickUserRepo(name: String) {
-        navigateToUserRepo.value = Event(name)
+        navigateToUserRepo.value = name
     }
 }
